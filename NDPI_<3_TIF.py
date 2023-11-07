@@ -29,6 +29,8 @@ CROPPING_TEMPLATE_CHANNEL_NAME = input("Enter the channel name that represents t
 # ask for the resolution level of the ndpi image
 LEVEL = int(input("Enter the resolution level of the NDPI image (0 = highest resolution, 1 = second highest resolution): "))
 
+# Radius of Gaussian blur
+RADIUS = 25
 
 # adjust THRESHOLD_SIZE to resolution level of ndpi image
 
@@ -66,14 +68,14 @@ def get_ndpi_filenames(ndpis_file):
 
 def ndpi_2_tif(ndpi_files):
     ndpi_image = openslide.open_slide(ndpi_files)
-    # Convert the NDPI image of level 3 to a grayscale 8bit TIF image
+    # Convert the NDPI image to a grayscale TIF image
     tiff_image = ndpi_image.read_region((0, 0), LEVEL, ndpi_image.level_dimensions[LEVEL]).convert('L')
     ndpi_image.close()
     return tiff_image 
 
 def get_binary(tiff_image):
     # blur the image to remove noise
-    blurred_image = tiff_image.filter(ImageFilter.GaussianBlur(25))
+    blurred_image = tiff_image.filter(ImageFilter.GaussianBlur(RADIUS))
 
     # convert tiff_image to a binary image using otsu thresholding
     binary_image = blurred_image.point(lambda p: p > 0 and 255)
@@ -85,8 +87,8 @@ def get_binary(tiff_image):
 
 def get_rois(ndpi_file):
 
-    tiff_image = ndpi_2_tif(ndpi_files[0])
-    # convert tiff_image to binary image
+    tiff_image = ndpi_2_tif(ndpi_file)
+
     binary_image = get_binary(tiff_image)
     
     # Find contours in binary image
