@@ -12,7 +12,7 @@ The binary image is created using blurring and otsu thresholding.
 The user is prompted to select the channel from which the ROIs are extracted. 
 The same ROIs are then used to crop the images from the other channels. 
 
-Installation instructions can be found at the bottom of this script.
+Installation and usage instructions can be found at the bottom of this script.
 
 This is not the fastest script (single CPU).
 It works good enough for NDPI files of around 200-300MB, requiring about 20GB RAM.
