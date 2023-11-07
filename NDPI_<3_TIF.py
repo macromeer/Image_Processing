@@ -7,6 +7,10 @@ The same ROIs are then used to crop the images from the other channels.
 
 Installation instructions can be found at the bottom of this script.
 
+This is not the fastest script (single CPU).
+It takes between 1-5 minutes per slide with 0.23-0.46um/pixel resolution. 
+The user is prompted to select either resolution level.
+
 """
 
 import openslide
