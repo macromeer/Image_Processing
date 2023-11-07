@@ -1,14 +1,8 @@
-
 """
-Installation (Linux):
+Script to extract regions of interest (ROIs) from NDPI files and save them as TIF files.
+ROIs are extracted by finding the contours in a binary image. The binary image is created using blurring and otsu thresholding. The user is prompted to select the channel from which the ROIs are extracted. The same ROIs are then used to crop the images from the other channels. 
 
-sudo apt install openslide-tools
-mamba create -n openslide-env openslide-python opencv-python -c conda-forge
-
-Usage:
-
-mamba activate openslide-env
-python NDPI2TIF.py
+Installation instructions can be found at the bottom of this script.
 
 """
 
@@ -140,3 +134,40 @@ for ndpis_file in ndpis_files:
                 #print roi i of number_of_rois and dimensions of cropped_image and output_filename
                 print("ROI %d of %d with dimensions %s saved as %s" % (i+1, number_of_rois, cropped_image_dimensions, output_filename + "_roi_0" + str(i) + ".tif"))
                 cropped_image.save(output_filename + "_roi_0" + str(i) + ".tif")
+
+
+
+
+
+"""
+
+1) Installation (Ubuntu)
+
+1.1) Install OpenSlide
+
+sudo apt install openslide-tools
+
+1.2) Install fast package manager Mamba
+
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+bash Miniforge3-$(uname)-$(uname -m).sh
+
+1.3) Other operating systems (Windows, Mac OS)
+
+https://openslide.org/api/python/#installing
+https://github.com/conda-forge/miniforge 
+
+
+2) Create Mamba environment and install dependencies
+
+mamba create -n openslide-env openslide-python opencv-python 
+
+
+3) Usage
+
+In CLI, type
+
+mamba activate openslide-env
+python NDPI2TIF.py
+
+"""
