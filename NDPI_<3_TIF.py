@@ -9,7 +9,7 @@ filename-DAPI.ndpi
 
 ROIs are extracted by finding the contours in a binary image. 
 The binary image is created using blurring and otsu thresholding. 
-The user is prompted to select the channel from which the ROIs are extracted. 
+The user is prompted to select the channel from which the ROIs should be extracted. 
 The same ROIs are then used to crop the images from the other channels. 
 
 Installation and usage instructions can be found at the bottom of this script.
