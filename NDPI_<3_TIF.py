@@ -1,5 +1,12 @@
 """
 Script to extract regions of interest (ROIs) from NDPI files and save them as TIF files.
+
+Requires folder containing single channel NDPI files with an NDPIS file with the following filename pattern:
+
+filename.ndpis
+filename-DAPI.ndpi
+...
+
 ROIs are extracted by finding the contours in a binary image. 
 The binary image is created using blurring and otsu thresholding. 
 The user is prompted to select the channel from which the ROIs are extracted. 
