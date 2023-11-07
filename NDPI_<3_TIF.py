@@ -105,7 +105,7 @@ def get_rois(ndpi_file):
     for roi in rois:
         sizes.append(roi[2] * roi[3])
 
-    # only keep rois that are larger than THRSHOLD_SIZE
+    # only keep rois that are larger than THRESHOLD_SIZE
     rois = [roi for i, roi in enumerate(rois) if sizes[i] > THRESHOLD_SIZE]
 
     return rois
@@ -113,37 +113,28 @@ def get_rois(ndpi_file):
 
 
 
-# loop over ndpis_files
+
 for ndpis_file in ndpis_files:
 
     ndpi_files = get_ndpi_filenames(ndpis_file)
-    # get the ndpi_file which has the CROPPING_TEMPLATE_CHANNEL_NAME in its name
     CROPPING_TEMPLATE_CHANNEL = [ndpi_file for ndpi_file in ndpi_files if CROPPING_TEMPLATE_CHANNEL_NAME in ndpi_file][0]
-    # get rois from tiff image which is CROPPING_TEMPLATE_CHANNEL
     rois = get_rois(CROPPING_TEMPLATE_CHANNEL)
-    # get number of rois
     number_of_rois = len(rois)
 
-    # create for loop that iterates through ndpi files in input directory
     for ndpi_file in ndpi_files:
         if ndpi_file.endswith(".ndpi"):
 
-            # create output filename based on input filename
             output_filename = os.path.join(output_dir, os.path.splitext(os.path.basename(ndpi_file))[0])
-            
-            # convert ndpi to tif
             tiff_image = ndpi_2_tif(ndpi_file)
-
-            
-            # crop each roi from the tiff image and save it using output_filename
+         
             for i, roi in enumerate(rois):
                 x, y, w, h = roi
                 cropped_image = tiff_image.crop((x, y, x + w, y + h))
                 # get roi number and dimensions of cropped image
                 cropped_image_dimensions = cropped_image.size
                 #print roi i of number_of_rois and dimensions of cropped_image and output_filename
-                print("ROI %d of %d with dimensions %s saved as %s" % (i+1, number_of_rois, cropped_image_dimensions, output_filename + "_roi_0" + str(i) + ".tif"))
-                cropped_image.save(output_filename + "_roi_0" + str(i) + ".tif")
+                print("ROI %d of %d with dimensions %s saved as %s" % (i+1, number_of_rois, cropped_image_dimensions, output_filename + "_roi_0" + str(i+1) + ".tif"))
+                cropped_image.save(output_filename + "_roi_0" + str(i+1) + ".tif")
 
 
 
