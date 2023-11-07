@@ -7,7 +7,7 @@ filename.ndpis
 filename-DAPI.ndpi
 ...
 
-ROIs are extracted by finding the contours in a binary image and then filtered by size. 
+ROIs are extracted by finding the contours in a binary image and are then filtered by size (keep big hearts, skip the rest). 
 The binary image is created using blurring and otsu thresholding. 
 The user is prompted to select the channel from which the ROIs should be extracted. 
 The same ROIs are then used to crop the images from the other channels. 
