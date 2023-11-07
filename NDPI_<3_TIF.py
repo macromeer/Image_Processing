@@ -31,7 +31,7 @@ import numpy as np
 # ask for the path to the ndpis files
 input_folder = input("Enter the path to the NDPI files: ")
 # ask for the channel that contains the cropping template
-CROPPING_TEMPLATE_CHANNEL_NAME = input("Enter the channel name that represents the cropping template: ")
+CROPPING_TEMPLATE_CHANNEL_NAME = input("Enter the channel name that represents the cropping template (hearts = FITC): ")
 
 # ask for the resolution level of the ndpi image
 LEVEL = int(input("Enter the resolution level of the NDPI image (0 = highest resolution, 1 = second highest resolution): "))
