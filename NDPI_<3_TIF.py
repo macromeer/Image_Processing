@@ -168,7 +168,9 @@ https://github.com/conda-forge/miniforge
 
 2) Create Mamba environment and install dependencies
 
-mamba create -n openslide-env openslide-python opencv-python 
+mamba create -n openslide-env openslide-python
+mamba activate openslide-env
+pip install opencv-python
 
 
 3) Usage
